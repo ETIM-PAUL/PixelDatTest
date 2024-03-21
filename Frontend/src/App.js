@@ -1,11 +1,14 @@
-import logo from './logo.svg';
+import { useAccount } from 'wagmi';
 import './App.css';
 import TopNav from './components/TopNav';
 import { useState } from 'react';
+import { useWeb3Modal } from '@web3modal/wagmi/react';
 
 function App() {
   const [disabled, setDisabled] = useState(false)
   const [isLoading, setLoading] = useState(false)
+  const { address } = useAccount()
+  const { open } = useWeb3Modal()
 
   return (
     <div className="App">
@@ -23,12 +26,16 @@ function App() {
           </div>
           <div className='inline-grid w-full mt-4'>
             <label className='text-white font-medium text-lg pb-1'>BUSD Amount</label>
-            <input className='h-10 w-full py-1 px-3 border rounded-md focus:outline-none' placeholder='Enter BUSD amount' />
+            <input type="number" className='h-10 w-full py-1 px-3 border rounded-md focus:outline-none appearance-none' placeholder='Enter BUSD amount' />
           </div>
         </div>
 
         <div className='max-w-sm mx-auto mt-12'>
-          <button disabled={disabled} className={`bg-blue-500 w-full h-12 text-white font-bold text-xl rounded-md disabled:cursor-not-allowed disabled bg-blue-800 disabled:opacity-50`}>{isLoading ? "Processing" : "Transfer BUSD"}</button>
+          {!!address ?
+            <button disabled={disabled} className={`bg-blue-500 w-full h-12 text-white font-bold text-xl rounded-md disabled:cursor-not-allowed disabled bg-blue-800 disabled:opacity-50`}>{isLoading ? "Processing" : "Transfer BUSD"}</button>
+            :
+            <button onClick={() => open()} className={`bg-blue-500 w-full h-12 text-white font-bold text-xl rounded-md`}>Connect</button>
+          }
         </div>
       </div>
     </div>
