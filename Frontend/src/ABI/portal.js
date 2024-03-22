@@ -25,13 +25,7 @@ export const portalABI = [
         "internalType": "uint256"
       }
     ],
-    "outputs": [
-      {
-        "name": "success",
-        "type": "bool",
-        "internalType": "bool"
-      }
-    ],
+    "outputs": [],
     "stateMutability": "nonpayable"
   },
   {

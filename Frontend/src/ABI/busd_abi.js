@@ -88,7 +88,7 @@ export const busdAbi = [
         "internalType": "uint256"
       }
     ],
-    "stateMutability": "nonpayable"
+    "stateMutability": "view"
   },
   {
     "type": "function",
@@ -348,11 +348,6 @@ export const busdAbi = [
         "internalType": "address"
       }
     ]
-  },
-  {
-    "type": "error",
-    "name": "OnlyOwner",
-    "inputs": []
   },
   {
     "type": "error",

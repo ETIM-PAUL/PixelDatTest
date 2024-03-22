@@ -1,2 +1,13 @@
-export const BUSD = "0x086a89e074934eE178d3Eb4D49B84d03d4B22dee";
-export const BUSDHandler = "0x33bA2C273a55C8a3766B597c1C9343b8E9A05F97";
+import { http, createConfig } from '@wagmi/core'
+import { bscTestnet } from '@wagmi/core/chains'
+
+export const BUSD = "0xCC933412b0323333108E51A6A4D9A3369CA05347";
+export const BUSDHandler = "0x3F9d9eedeA22cD87A78F11d5acF18005E066952f";
+
+
+export const config = createConfig({
+  chains: [bscTestnet],
+  transports: {
+    [bscTestnet.id]: http(),
+  },
+})

@@ -15,7 +15,7 @@ contract BUSDHandler {
     }
 
 
-function forwardBUSD(address _receiver, uint amount) external returns (bool success) {
+function forwardBUSD(address _receiver, uint amount) external {
 if(_receiver == address(0)){
             revert InvalidAddress();
         }

@@ -13,16 +13,6 @@ contract BUSDTest is Test {
         user1 = vm.addr(1);
     }
 
-    function testOnlyOwnerRevert() public {
-        vm.prank(user1);
-        vm.expectRevert(
-            abi.encodeWithSelector(
-                BUSD.OnlyOwner.selector
-            )
-        );
-    busd.mint(user1,1e18);
-    }
-
     function testMint() public {
     busd.mint(user1,1e18);
     uint bal = busd.balanceOfUser(user1);
