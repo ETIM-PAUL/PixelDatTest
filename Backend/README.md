@@ -1,66 +1,39 @@
-## Foundry
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+### To setup backend
+###### Run this command "forge init"
 
-Foundry consists of:
+### To deploy and verify for BUSD ERC20 contract
 
--   **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
--   **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
--   **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
--   **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+##### Run this command 
+forge create --rpc-url desiredchainRPC \
+    --private-key yourPrivateKey \
+    --etherscan-api-key yourEtherscanKey \
+    --verify \
+    src/BUSD.sol:BUSD
+    
+    to run deploy and verify BUSD ERC20 contract
 
-## Documentation
 
-https://book.getfoundry.sh/
+### To deploy and verify for BUSDHandler contract
 
-## Usage
+##### Run this command
+forge create --rpc-url urdesiredchainRPC \
+    --constructor-args busdTokenAddress \
+    --private-key yourPrivateKey \
+    --etherscan-api-key yourEtherscanKey \
+    --verify \
+    src/BUSDHandler.sol:BUSDHandler
+    
+    to run deploy and verify BUSDHandler contract
 
-### Build
 
-```shell
-$ forge build
-```
 
-### Test
+### To run the test for BUSD ERC20 contract
 
-```shell
-$ forge test
-```
+##### Run this command next "forge test -vvvvv --match-contract BUSDTest" to run test for BUSD ERC20 contract
 
-### Format
+### To run the test for BUSDHandler contract
 
-```shell
-$ forge fmt
-```
+##### Run this command next "forge test -vvvvv --match-contract BUSDHandlerTest" to run test for BUSDHandler contract
 
-### Gas Snapshots
-
-```shell
-$ forge snapshot
-```
-
-### Anvil
-
-```shell
-$ anvil
-```
-
-### Deploy
-
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
-
-### Cast
-
-```shell
-$ cast <subcommand>
-```
-
-### Help
-
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+#### All the contracts have written tests in foundry to test possible contract functions, as well as possible issues. Although to deploy the contract on mainnet, all contracts need to pass through different stages of audits

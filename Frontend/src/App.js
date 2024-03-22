@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import { busdAbi } from './ABI/busd_abi';
 
 function App() {
-  const { writeContract, writeContractAsync } = useWriteContract()
+  const { writeContractAsync } = useWriteContract()
   const [ethAddress, setEthAddress] = useState("")
   const [amount, setAmount] = useState()
   const [disabled, setDisabled] = useState(false)
@@ -25,16 +25,23 @@ function App() {
     args: [address],
   })
 
+  // transfer BUSD through BUSD portal
   const transferBUSD = async () => {
     try {
+
+      //check that passed address is valid
       if (!isAddress(ethAddress)) {
         toast.error("Wrong Ethereum Address", 5000);
         return;
       }
+
+      //check that amount is valid
       if (amount === undefined || amount === "") {
         toast.error("Enter Amount in BUSD", 5000);
         return;
       }
+
+      //check that amount entered is equal or less than the connected account balance
       if (Number(result.data) < Number(parseEther(amount.toString()))) {
         toast.error("Insufficent Amount", 5000);
         return;
@@ -42,6 +49,7 @@ function App() {
       setLoading(true);
       setDisabled(true);
 
+      //approve function
       const result2 = writeContractAsync({
         abi: busdAbi,
         address: BUSD,
@@ -52,10 +60,12 @@ function App() {
         ],
       });
 
+      //await aprrove transaction result
       const approveResult = await waitForTransactionReceipt(config, {
         hash: await result2,
       })
 
+      ////call the forward function that does the transfer of BUSD
       if (approveResult?.status === "success") {
         const result3 = writeContractAsync({
           address: BUSDHandler,
@@ -67,9 +77,10 @@ function App() {
           hash: await result3,
         })
         if (forwardResult.status === "success") {
+          //reset states and toast success message
           setLoading(false);
           setEthAddress("");
-          setAmount();
+          setAmount(0);
           setDisabled(false);
           toast.success("Transaction completed", 5000)
         }
