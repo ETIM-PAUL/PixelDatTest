@@ -1,4 +1,6 @@
 import logo from "../logo.jpeg"
+import { Link } from "react-router-dom"
+
 function TopNav() {
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -8,6 +10,16 @@ function TopNav() {
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">BUSDPortal</span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <Link to="/another">
+            <button className="text-white font-medium rounded-lg text-sm px-4 py-3 text-center">
+              another page
+            </button>
+          </Link>
+          <Link to="/contact">
+            <button className="text-white font-medium rounded-lg text-sm px-4 py-3 text-center">
+              Contact us
+            </button>
+          </Link>
           <button type="button" className="text-white font-medium rounded-lg text-sm px-4 py-3 text-center">
             <w3m-button size='md' />
           </button>

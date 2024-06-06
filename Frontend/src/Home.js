@@ -10,7 +10,7 @@ import { formatEther, isAddress, parseEther } from 'viem';
 import { toast } from 'react-toastify';
 import { busdAbi } from './ABI/busd_abi';
 
-function App() {
+function Home() {
   const { writeContractAsync } = useWriteContract()
   const [ethAddress, setEthAddress] = useState("")
   const [amount, setAmount] = useState()
@@ -134,4 +134,4 @@ function App() {
   );
 }
 
-export default App;
+export default Home;
